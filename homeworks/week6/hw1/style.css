@@ -29,21 +29,20 @@ header {
     padding-top: 90px;
     padding-bottom: 40px;
 }
-.header__box{
-    margin: 0px 16%;
-}   
-
+.header__box {
+    margin: 0px 17%;
+}
 .header__title {
     font-size: 70px;
 }
 #title__content {
-    white-space:pre-line;
+    word-break: break-word;
 }
 .header__link {
     background-color:#1F7EEC;
     color: white;
     padding: 15px;
-    width: 140px;
+    width: 170px;
     font-size: 20px;
     border-radius:10px;
     text-align:center;
@@ -52,18 +51,18 @@ header {
     background-color:#0060d5;
 }
 article {
-    margin: 3% 16%;
+    margin: 3%  16%;
 }
 .article__box {
     display: inline-block;
-    max-width: 290px;
-    margin: 10px;
+    width: 30%;
+    margin: 7px;
 }
 .box__title {
     font-size: 35px;
 }
 .box__content {
-    white-space:pre;
+    word-break: break-word;
 }
 .box__link {
     background-color: #939393;
@@ -80,4 +79,17 @@ article {
 }
 footer {
     margin: 20px 16%;
+}
+@media screen and (max-width :768px) {
+ .header__box {
+    margin:  0px 2%;
+    }
+ article {
+    margin:  3% 2%;
+    }
+ .article__box {
+    display:block;
+    width:90%;
+    margin: 7px;
+    }
 }
