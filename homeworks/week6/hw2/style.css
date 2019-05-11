@@ -1,0 +1,43 @@
+body {
+    margin: 0px;
+}
+.title {
+    margin: 35px 18% 20px 18%;
+    width: 60%;
+    font-size: 40px;
+}
+article {
+    position:relative;
+}
+.share__button {
+    position:fixed;
+    top: 130px;
+    left: 50px;
+    border: 1px solid darkgray;
+    border-radius: 50%;
+    padding:10px 20px;
+}
+.share__button:hover {
+    border:1px solid gray;
+}
+.main__content {
+    margin:0px 18%;
+    width: 60%;
+    white-space: pre-line;
+    font-size:20px;
+}
+@media screen and (max-width:992px) {
+    .title {
+    margin: 35px 5%;
+    font-size: 30px;
+    }
+    .share__button{
+        display:none;
+    }
+    .main__content {
+    margin:0px 5%;
+    width: 90%;
+    white-space: pre-line;
+    font-size:15px;
+}
+}
