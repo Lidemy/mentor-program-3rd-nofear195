@@ -1,0 +1,39 @@
+.main { 
+    position: fixed;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    font-size:25px;
+    text-align: center;
+    border: 1px solid grey;
+    padding:  10px 15px;  
+}
+button {
+  font-size:20px;
+}
+.row {
+  height: 52px;
+  display: flex;
+}
+.col {
+  width: 92px;
+  border: 1px solid grey;
+  margin: 5px;
+  padding-top: 7px;    
+}
+#show {
+  font-size: 40px;
+  width: 396px;
+  text-align: right;
+  padding: 0;
+}
+#divide {
+  margin-left: 209px;
+}
+#equal {
+  width:194px;
+  background-color: coral;
+}
+.col:nth-child(4),.row:nth-child(2) .col {
+  background-color:#a8c1ce;
+}

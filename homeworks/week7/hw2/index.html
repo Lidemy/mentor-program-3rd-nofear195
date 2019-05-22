@@ -1,0 +1,134 @@
+<DOCTYPE HTML>
+<html>
+  <head>
+     <meta charset="utf-8"/>
+     <title>homework2</title>
+     <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <form class="submitSample">
+     <div class="main">
+        <div class="mainTitle">程式導師實驗計畫第三期報名表單</div>
+        <div class="description">
+            詳情請參考：<a herf="https://medium.com/hulis-blog/mentor-program-3rd-47a2e85e33b3">https://medium.com/hulis-blog/mentor-program-3rd-47a2e85e33b3</a>
+            填完之後請務必按照文章內的說明再寄信給我，才算報名成功喔
+        </div> 
+        <div class="must">*必填</div>
+        <div class="row ro1">
+            <div class="rowTitle"><p>電子郵件地址</p><p class="must">*</p></div>
+            <div class="rowInput"><input type="text" placeholder="你的電子郵件" class="incon" name="email"/></div>
+        </div>
+        <div class="row ro2">
+               <div class="rowTitle"><p>暱稱</p><p class="must"> *</p></div>
+               <div class="rowContent">該如何稱呼你</div>
+               <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="nickname"/></div>   
+        </div>
+        <div class="row ro3">
+            <div class="rowTitle"><p>報名類型</p><p class="must">*</p></div>
+               <div class="rowSelect">
+                  <label><input type="radio" name="sign" id="first" value="junior"></label>
+                  <label for="first">從零到一基礎班（兩個月後開始收保證金 5000，淘汰不退還，結業後兩個月內找到工作付一個月半薪水，沒工作不用付）</label>         
+                 </div>
+               <div class="rowSelect">
+                   <label><input type="radio" name="sign" id="second" value="senior"></label>
+                  <label for="second">在職工程師加強班（兩個月後開始收保證金 5000，三個月時收學費 35000 元台幣，被淘汰不退還）</label>
+               </div>
+           </div>
+        <div class="row ro4">
+            <div class="rowTitle"><p>現在的職業</p><p class="must">*</p></div>
+               <div class="rowContent">範例：學生、前端工程師、待業中、業務</div>
+               <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="job"/></div>
+        </div>
+        <div class="row ro5">
+               <div class="rowTitle"><p>怎麼知道這個計畫的？</p><p class="must">*</p></div>
+               <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="plan"/></div>
+        </div>
+        <div class="row ro6">
+            <div class="rowTitle"><p>是否有程式相關背景？</p><p class="must">*</p></div>
+               <div class="rowContent">範例：無、高中時候學過C++、學過一點網頁前端、目前在資策會上課...</div>
+               <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="back"/></div>
+        </div>
+        <div class="row ">
+               <div class="rowTitle">其他</div>
+               <div class="rowContent">任何你想說的</div>
+               <div class="rowInput"><input type="text" placeholder="您的回答" class="ies" name="other"/></div>
+        </div>
+        <div class="row ">
+               <div><input type="submit" class="btn"/></div>
+               <div class="rowContent">請勿利用 Google 表單送出密碼</div>
+        </div>
+     </div>
+      </form> 
+     <script>
+         const element = document.querySelector('.submitSample');
+         const email = document.querySelector('input[name=email]');
+         const nickname = document.querySelector('input[name=nickname]');
+         const first = document.querySelector('#first');
+         const second = document.querySelector('#second');
+         const job = document.querySelector('input[name=job]');
+         const plan = document.querySelector('input[name=plan]');
+         const back = document.querySelector('input[name=back]');
+         const other = document.querySelector('input[name=other]');
+         function newalert(rowClass) {
+         const tmp = document.querySelector(rowClass);
+         const div = document.createElement('div');
+         div.classList.add('rowAlert');
+         div.innerText = '這是必填問題';
+         tmp.appendChild(div);
+         tmp.style.background = '#FFD6D6';
+       }
+         function result() {
+           if (email.value === '') {
+             const tmp = document.querySelector('input[name=email].incon');
+             tmp.style.borderBottom = '3px solid #D93025';
+             tmp.style.background = '#FFD6D6';
+             newalert('.ro1');
+             return false;
+           } else if (nickname.value === '') {
+             const tmp = document.querySelector('input[name=nickname].incon');
+             tmp.style.borderBottom = '3px solid #D93025';
+             tmp.style.background = '#FFD6D6';
+             newalert('.ro2');
+             return false;
+           } else if (first.checked === second.checked) {
+             newalert('.ro3');
+             return false;
+           } else if (job.value === '') {
+             const tmp = document.querySelector('input[name=job].incon');
+             tmp.style.borderBottom = '3px solid #D93025';
+             tmp.style.background = '#FFD6D6';
+             newalert('.ro4');
+             return false;
+           } else if (plan.value === '') {
+             const tmp = document.querySelector('input[name=plan].incon');
+             tmp.style.borderBottom = '3px solid #D93025';
+             tmp.style.background = '#FFD6D6';
+             newalert('.ro5');
+             return false;
+           } else if (back.value === '') {
+             const tmp = document.querySelector('input[name=back].incon');
+             tmp.style.borderBottom = '3px solid #D93025';
+             tmp.style.background = '#FFD6D6';
+             newalert('.ro6');
+             return false;
+           } else {
+             console.log('電子郵件地址: ' + email.value);
+             console.log('暱稱: ' + nickname.value);
+             console.log('從零到一基礎班: ' + first.checked);
+             console.log('在職工程師加強班: ' + second.checked);
+             console.log('現在職業: ' + job.value);
+             console.log('怎麼知道這個計畫的?: ' + plan.value);
+             console.log('是否有程式相關背景?: ' + back.value);
+             console.log('其他: ' + other.value);
+             alert('提交成功');
+           }
+        }
+        element.addEventListener('submit', function (e) {
+          const tmp = result();
+          if (tmp === false) {
+            e.preventDefault();
+          }
+        });
+     </script> 
+  </body>
+</html>
