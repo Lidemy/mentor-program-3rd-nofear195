@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset=utf-8 />
+        <title>homework3</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+       <div class="main">
+           <div class="row">
+              <div class="col" id="show">0</div> 
+           </div>
+           <div class="row">
+              <button class="col" id="AC">AC</buttonv> 
+              <button class="col operator" id="divide">÷</button> 
+           </div>
+           <div class="row">
+              <button class="col num" data-value="7">7</button> 
+              <button class="col num" data-value="8">8</button> 
+              <button class="col num" data-value="9">9</button> 
+              <button class="col operator" id="multiple">×</button> 
+           </div>
+           <div class="row">
+              <button class="col num" data-value="4">4</button> 
+              <button class="col num" data-value="5">5</button> 
+              <button class="col num" data-value="6">6</button> 
+              <button class="col operator" id="minus">-</button> 
+           </div>
+           <div class="row">
+              <button class="col num" data-value="1">1</button> 
+              <button class="col num" data-value="2">2</button> 
+              <button class="col num" data-value="3">3</button> 
+              <button class="col operator" id="add">+</button> 
+           </div>
+           <div class="row">
+              <button class="col num" data-value="0">0</button> 
+              <button class="col num" data-value=".">.</button>  <!-- 待解決 -->
+              <button class="col" id="equal">=</button> 
+           </div>
+       </div>
+      <script>
+        const show = document.querySelector('#show')
+        var result = 0
+        var change = 0
+        var tmp = ''
+        var first = ''
+        var second = ''
+        function operate (n) {
+            const num1=parseInt(first)
+            const num2=parseInt(second)
+            switch(n) {
+                case 'add':
+                    result = num1 + num2;
+                    break;
+                case 'minus':
+                    result = num1 - num2;
+                    break;
+                case 'multiple':
+                    result = num1 * num2;
+                    break;
+                case 'divide':
+                    result = num1 / num2;
+                    break;  
+            }
+         }
+         document.querySelector('.main').addEventListener('click',
+           function(e) {
+             if (e.target.classList.contains('num') && change ===0 ) {
+                 first += e.target.getAttribute('data-value')
+                 show.innerText = first
+             } else if (e.target.classList.contains('num') )  {
+                 second += e.target.getAttribute('data-value')
+                 show.innerText = second
+             } else if (e.target.classList.contains('operator')) {
+                 change = 1
+                 tmp = e.target.id
+             } else if (e.target.id === "equal") {
+                 operate(tmp)
+                 show.innerText = result
+             } else if (e.target.id === "AC") {
+                 show.innerText = 0
+                 result = 0
+                 change = 0
+                 tmp = ''
+                 first = ''
+                 second = ''
+             }  
+          }
+        )
+      </script>
+    </body>
+</html>
