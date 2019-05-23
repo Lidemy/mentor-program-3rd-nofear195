@@ -76,93 +76,47 @@
          const back = document.querySelector('input[name=back]');
          const other = document.querySelector('input[name=other]');
         
-         
-         function result() {
-           // 很想簡化但是 'input[name=email].incon' 內的 email 用其他變數代替一直會顯示: null 或是 少了 ")"
-           // 請問有甚麼辦法可以解決?
-           if (email.value === '') {
-             document.querySelector('input[name=email].incon').classList.add('alertbott')
-             document.querySelector('.ro1').classList.add('alertback')
-             document.querySelector('.rr1').classList.remove('visible')
-             return false
-           } else {
-               document.querySelector('input[name=email].incon').classList.remove('alertbott')
-               document.querySelector('.ro1').classList.remove('alertback')
-               document.querySelector('.rr1').classList.add('visible')
-           }
-           
-            if (nickname.value === '') {
-             document.querySelector('input[name=nickname].incon').classList.add('alertbott')
-             document.querySelector('.ro2').classList.add('alertback')
-             document.querySelector('.rr2').classList.remove('visible')
-             return false
-           } else {
-               document.querySelector('input[name=email].incon').classList.remove('alertbott')
-               document.querySelector('.ro2').classList.remove('alertback')
-               document.querySelector('.rr2').classList.add('visible')
-           }
-             
-             if (first.checked === second.checked) {
-             document.querySelector('.ro3').classList.add('alertback')
-             document.querySelector('.rr3').classList.remove('visible') 
-             return false
-           } else {
-               document.querySelector('.ro3').classList.remove('alertback')
-               document.querySelector('.rr3').classList.add('visible')
-           }
-             
-             if (job.value === '') {
-             document.querySelector('input[name=job].incon').classList.add('alertbott')
-             document.querySelector('.ro4').classList.add('alertback')
-             document.querySelector('.rr4').classList.remove('visible')
-             return false
-           } else {
-               document.querySelector('input[name=job].incon').classList.remove('alertbott')
-               document.querySelector('.ro4').classList.remove('alertback')
-               document.querySelector('.rr4').classList.add('visible')
-           }
-             
-             if (plan.value === '') {
-             document.querySelector('input[name=plan].incon').classList.add('alertbott')
-             document.querySelector('.ro5').classList.add('alertback')
-             document.querySelector('.rr5').classList.remove('visible')
-             return false
-           } else {
-               document.querySelector('input[name=plan].incon').classList.remove('alertbott')
-               document.querySelector('.ro5').classList.remove('alertback')
-               document.querySelector('.rr5').classList.add('visible')
-           }
-             
-             if (back.value === '') {
-             document.querySelector('input[name=back].incon').classList.add('alertbott')
-             document.querySelector('.ro6').classList.add('alertback')
-             document.querySelector('.rr6').classList.remove('visible')
-             return false
-           } else {
-               document.querySelector('input[name=back].incon').classList.remove('alertbott')
-               document.querySelector('.ro6').classList.remove('alertback')
-               document.querySelector('.rr6').classList.add('visible')
-           }
-             
-             if ( (email.value !== '') && (nickname.value !== '') &&(job.value !== '') &&(plan.value !== '') && (back.value !== '') && (first.checked !== second.checked) ) {
-                console.log('電子郵件地址: ' + email.value);
-                console.log('暱稱: ' + nickname.value);
-                console.log('從零到一基礎班: ' + first.checked);
-                console.log('在職工程師加強班: ' + second.checked);
-                console.log('現在職業: ' + job.value);
-                console.log('怎麼知道這個計畫的?: ' + plan.value);
-                console.log('是否有程式相關背景?: ' + back.value);
-                console.log('其他: ' + other.value);
-                alert('提交成功');
-                 }
+         function inputError(name, n) {
+             if (name.value === '') {
+                  name.classList.add('alertbott')
+                  document.querySelector('.ro'+n+' ').classList.add('alertback')
+                  document.querySelector('.rr'+n+' ').classList.remove('visible')
+                  return false
+             } else {
+                  name.classList.remove('alertbott')
+                  document.querySelector('.ro'+n+' ').classList.remove('alertback')
+                  document.querySelector('.rr'+n+' ').classList.add('visible')
+             }
          }
-         
-        element.addEventListener('submit', function (e) {
-          const tmp = result();
-          if (tmp === false) {
-            e.preventDefault();
+         function radioError(first, second, n ) {
+              if (first.checked === second.checked) {
+                  document.querySelector('.ro'+n+' ').classList.add('alertback')
+                  document.querySelector('.rr'+n+' ').classList.remove('visible')
+                  return false
+           } else {
+                  document.querySelector('.ro'+n+' ').classList.remove('alertback')
+                  document.querySelector('.rr'+n+' ').classList.add('visible')
+           }
+         }
+         element.addEventListener('submit',
+            function(e) {
+             if ( inputError(email, 1) === false  || inputError(nickname, 2) === false || 
+                  radioError(first, second, 3) === false || inputError(job, 4)  === false || 
+                  inputError(plan, 5) === false || inputError(back, 6) === false) { 
+                 e.preventDefault()
+             } else {
+                 console.log('電子郵件地址: ' + email.value);
+                 console.log('暱稱: ' + nickname.value);
+                 console.log('從零到一基礎班: ' + first.checked);
+                 console.log('在職工程師加強班: ' + second.checked);
+                 console.log('現在職業: ' + job.value);
+                 console.log('怎麼知道這個計畫的?: ' + plan.value);
+                 console.log('是否有程式相關背景?: ' + back.value);
+                 console.log('其他: ' + other.value);
+                 alert('提交成功');
+             }
           }
-        });
+         )
      </script> 
   </body>
 </html>
