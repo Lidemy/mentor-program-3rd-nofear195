@@ -49,14 +49,14 @@
              element.addEventListener('click',
               function() { 
                  end = Date.now()
-                 const  diff = end - start  
+                 let  diff = end - start  
+                 let result = (diff -rand)/1000
                  if (tmp === 1) {
                      if (diff < rand) {
                          clearTimeout(interval)
                          alert('還沒變色喔，失敗!')
-                         
                      } else {
-                       alert('你的成績: '+ diff/1000+ ' 秒')
+                       alert('你的成績: '+ result + ' 秒')
                        element.classList.remove('active') 
                    }
                  }
