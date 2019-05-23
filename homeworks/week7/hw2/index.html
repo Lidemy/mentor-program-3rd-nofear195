@@ -17,11 +17,13 @@
         <div class="row ro1">
             <div class="rowTitle"><p>電子郵件地址</p><p class="must">*</p></div>
             <div class="rowInput"><input type="text" placeholder="你的電子郵件" class="incon" name="email"/></div>
+            <div class= "rowalert visible rr1">這是必填問題</div>
         </div>
         <div class="row ro2">
                <div class="rowTitle"><p>暱稱</p><p class="must"> *</p></div>
                <div class="rowContent">該如何稱呼你</div>
                <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="nickname"/></div>   
+               <div class= "rowalert visible rr2">這是必填問題</div>
         </div>
         <div class="row ro3">
             <div class="rowTitle"><p>報名類型</p><p class="must">*</p></div>
@@ -33,20 +35,24 @@
                    <label><input type="radio" name="sign" id="second" value="senior"></label>
                   <label for="second">在職工程師加強班（兩個月後開始收保證金 5000，三個月時收學費 35000 元台幣，被淘汰不退還）</label>
                </div>
+               <div class= "rowalert visible rr3">這是必填問題</div>
            </div>
         <div class="row ro4">
             <div class="rowTitle"><p>現在的職業</p><p class="must">*</p></div>
                <div class="rowContent">範例：學生、前端工程師、待業中、業務</div>
                <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="job"/></div>
+               <div class= "rowalert visible rr4">這是必填問題</div>
         </div>
         <div class="row ro5">
                <div class="rowTitle"><p>怎麼知道這個計畫的？</p><p class="must">*</p></div>
                <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="plan"/></div>
+               <div class= "rowalert visible rr5">這是必填問題</div>
         </div>
         <div class="row ro6">
             <div class="rowTitle"><p>是否有程式相關背景？</p><p class="must">*</p></div>
                <div class="rowContent">範例：無、高中時候學過C++、學過一點網頁前端、目前在資策會上課...</div>
                <div class="rowInput"><input type="text" placeholder="您的回答" class="incon" name="back"/></div>
+              <div class= "rowalert visible rr6">這是必填問題</div>
         </div>
         <div class="row ">
                <div class="rowTitle">其他</div>
@@ -69,60 +75,88 @@
          const plan = document.querySelector('input[name=plan]');
          const back = document.querySelector('input[name=back]');
          const other = document.querySelector('input[name=other]');
-         function newalert(rowClass) {
-         const tmp = document.querySelector(rowClass);
-         const div = document.createElement('div');
-         div.classList.add('rowAlert');
-         div.innerText = '這是必填問題';
-         tmp.appendChild(div);
-         tmp.style.background = '#FFD6D6';
-       }
+        
+         
          function result() {
+           // 很想簡化但是 'input[name=email].incon' 內的 email 用其他變數代替一直會顯示: null 或是 少了 ")"
+           // 請問有甚麼辦法可以解決?
            if (email.value === '') {
-             const tmp = document.querySelector('input[name=email].incon');
-             tmp.style.borderBottom = '3px solid #D93025';
-             tmp.style.background = '#FFD6D6';
-             newalert('.ro1');
-             return false;
-           } else if (nickname.value === '') {
-             const tmp = document.querySelector('input[name=nickname].incon');
-             tmp.style.borderBottom = '3px solid #D93025';
-             tmp.style.background = '#FFD6D6';
-             newalert('.ro2');
-             return false;
-           } else if (first.checked === second.checked) {
-             newalert('.ro3');
-             return false;
-           } else if (job.value === '') {
-             const tmp = document.querySelector('input[name=job].incon');
-             tmp.style.borderBottom = '3px solid #D93025';
-             tmp.style.background = '#FFD6D6';
-             newalert('.ro4');
-             return false;
-           } else if (plan.value === '') {
-             const tmp = document.querySelector('input[name=plan].incon');
-             tmp.style.borderBottom = '3px solid #D93025';
-             tmp.style.background = '#FFD6D6';
-             newalert('.ro5');
-             return false;
-           } else if (back.value === '') {
-             const tmp = document.querySelector('input[name=back].incon');
-             tmp.style.borderBottom = '3px solid #D93025';
-             tmp.style.background = '#FFD6D6';
-             newalert('.ro6');
-             return false;
+             document.querySelector('input[name=email].incon').classList.add('alertbott')
+             document.querySelector('.ro1').classList.add('alertback')
+             document.querySelector('.rr1').classList.remove('visible')
+             return false
            } else {
-             console.log('電子郵件地址: ' + email.value);
-             console.log('暱稱: ' + nickname.value);
-             console.log('從零到一基礎班: ' + first.checked);
-             console.log('在職工程師加強班: ' + second.checked);
-             console.log('現在職業: ' + job.value);
-             console.log('怎麼知道這個計畫的?: ' + plan.value);
-             console.log('是否有程式相關背景?: ' + back.value);
-             console.log('其他: ' + other.value);
-             alert('提交成功');
+               document.querySelector('input[name=email].incon').classList.remove('alertbott')
+               document.querySelector('.ro1').classList.remove('alertback')
+               document.querySelector('.rr1').classList.add('visible')
            }
-        }
+           
+            if (nickname.value === '') {
+             document.querySelector('input[name=nickname].incon').classList.add('alertbott')
+             document.querySelector('.ro2').classList.add('alertback')
+             document.querySelector('.rr2').classList.remove('visible')
+             return false
+           } else {
+               document.querySelector('input[name=email].incon').classList.remove('alertbott')
+               document.querySelector('.ro2').classList.remove('alertback')
+               document.querySelector('.rr2').classList.add('visible')
+           }
+             
+             if (first.checked === second.checked) {
+             document.querySelector('.ro3').classList.add('alertback')
+             document.querySelector('.rr3').classList.remove('visible') 
+             return false
+           } else {
+               document.querySelector('.ro3').classList.remove('alertback')
+               document.querySelector('.rr3').classList.add('visible')
+           }
+             
+             if (job.value === '') {
+             document.querySelector('input[name=job].incon').classList.add('alertbott')
+             document.querySelector('.ro4').classList.add('alertback')
+             document.querySelector('.rr4').classList.remove('visible')
+             return false
+           } else {
+               document.querySelector('input[name=job].incon').classList.remove('alertbott')
+               document.querySelector('.ro4').classList.remove('alertback')
+               document.querySelector('.rr4').classList.add('visible')
+           }
+             
+             if (plan.value === '') {
+             document.querySelector('input[name=plan].incon').classList.add('alertbott')
+             document.querySelector('.ro5').classList.add('alertback')
+             document.querySelector('.rr5').classList.remove('visible')
+             return false
+           } else {
+               document.querySelector('input[name=plan].incon').classList.remove('alertbott')
+               document.querySelector('.ro5').classList.remove('alertback')
+               document.querySelector('.rr5').classList.add('visible')
+           }
+             
+             if (back.value === '') {
+             document.querySelector('input[name=back].incon').classList.add('alertbott')
+             document.querySelector('.ro6').classList.add('alertback')
+             document.querySelector('.rr6').classList.remove('visible')
+             return false
+           } else {
+               document.querySelector('input[name=back].incon').classList.remove('alertbott')
+               document.querySelector('.ro6').classList.remove('alertback')
+               document.querySelector('.rr6').classList.add('visible')
+           }
+             
+             if ( (email.value !== '') && (nickname.value !== '') &&(job.value !== '') &&(plan.value !== '') && (back.value !== '') && (first.checked !== second.checked) ) {
+                console.log('電子郵件地址: ' + email.value);
+                console.log('暱稱: ' + nickname.value);
+                console.log('從零到一基礎班: ' + first.checked);
+                console.log('在職工程師加強班: ' + second.checked);
+                console.log('現在職業: ' + job.value);
+                console.log('怎麼知道這個計畫的?: ' + plan.value);
+                console.log('是否有程式相關背景?: ' + back.value);
+                console.log('其他: ' + other.value);
+                alert('提交成功');
+                 }
+         }
+         
         element.addEventListener('submit', function (e) {
           const tmp = result();
           if (tmp === false) {
