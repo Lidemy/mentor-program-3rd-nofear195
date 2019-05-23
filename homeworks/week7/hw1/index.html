@@ -35,31 +35,32 @@
             
              btn.addEventListener('click',
                 function (e) {
-                  start = new Date()
+                  start =  Date.now()
                   interval = setTimeout (function(){
-                    element.classList.add('active')
+                    
+                      element.classList.add('active')
                   },rand)
                 e.stopPropagation()
                 btn.classList.add('visible')
                 btn.innerHTML = '<button>再玩一次</button>'
                 tmp = 1
-             
                 }
              )
              element.addEventListener('click',
               function() { 
-                 end = new Date()
+                 end = Date.now()
                  const  diff = end - start  
                  if (tmp === 1) {
                      if (diff < rand) {
                          clearTimeout(interval)
                          alert('還沒變色喔，失敗!')
-                         btn.classList.remove('visible')
+                         
                      } else {
                        alert('你的成績: '+ diff/1000+ ' 秒')
+                       element.classList.remove('active') 
                    }
-                  
                  }
+                 btn.classList.remove('visible')
                  tmp = 0
                  rand = (Math.floor(Math.random() * 2001 ) + 1000)
                 }

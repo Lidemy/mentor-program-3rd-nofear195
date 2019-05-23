@@ -67,3 +67,13 @@
   background-color: #036cdb;
   color: white;
 }
+.visible {
+    visibility: hidden;
+}
+.alertback  {
+    background : #FFD6D6;
+}
+.alertbott {
+    border-bottom: 3px solid #D93025;
+    background :#FFD6D6;
+}
