@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>hw3</title>
+    <style>
+        header {
+            text-align: center;
+        }
+
+        .profile {
+            border: 1px solid grey;
+            width: 320px;
+            height: 235px;
+            margin: 10px;
+            float: left;
+        }
+
+        .profile__content {
+            display: flex;
+            margin-right: 10px;
+        }
+
+        .profile__logo {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        .profile__table {
+            width: 278px;
+            table-layout: fixed;
+            margin-left: 10px;
+        }
+
+        .profile__status {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>League of Legends 目前正在直播的前 20 個實況</h1>
+    </header>
+    <div class="main">
+    </div>
+    <script>
+        const request = new XMLHttpRequest;
+        request.onload = function() {
+            const response = request.responseText;
+            const json = JSON.parse(response)
+            console.log(json.streams[0])
+            for (let i = 0; i < 20; i++) {
+                const div = document.createElement('div')
+                div.classList.add('profile')
+                div.innerHTML = `
+                 <img class="profile__preview" src="${json.streams[i].preview.medium}">
+                 <div class="profile__content">
+                    <img class="profile__logo" src="${json.streams[i].channel.logo}">
+                    <table class="profile__table">
+                      <tr>
+                        <th class="profile__status">${json.streams[i].channel.status}</th>
+                      </tr>
+                      <tr>
+                        <td class="profile__name">${json.streams[i].channel.name}</td>
+                     </tr>
+                    </table>
+                 </div>
+                 `
+                document.querySelector('.main').appendChild(div)
+            }
+
+        }
+        request.open('GET', 'https://api.twitch.tv/kraken/streams/?game=League%20of%20Legends', true)
+        request.setRequestHeader('Accept', 'application/vnd.twitchtv.v5+json')
+        request.setRequestHeader('Client-ID', '5q09kxq4nws55298783p9gh7di1hb4')
+        request.send()
+    </script>
+</body></html>
