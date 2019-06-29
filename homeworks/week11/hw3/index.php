@@ -21,7 +21,7 @@
   $result = $conn->query($sql . " " . 'LIMIT' . " " . $page_start . ',' . $page_size);
   
   // 確認是否有設置通行證
-  isset($_COOKIE["permit"])? $permit = $_COOKIE["permit"] : $permit = " ";
+  $permit = isset($_COOKIE["permit"]) ? $_COOKIE["permit"] : "";
   
   // 獲取 username
   $username = " ";
@@ -91,7 +91,7 @@
                     echo       "<p class='comments__link'>";
                                if ($row['username'] === $username) {
                                    echo "<a href='./comment_update.php?id=" . $row['id'] . "'>編輯</a>";
-                                   echo "<a href='./handle_comment_delete.php?id=" . $row['id'] . "'>刪除</a>";
+                                   echo "<a href='./handle_comment_delete.php?username=" . $row['username'] . "&id=" . $row['id'] . "'>刪除</a>";
                                }
                     echo       "</p>";
                     echo   "</div>";
