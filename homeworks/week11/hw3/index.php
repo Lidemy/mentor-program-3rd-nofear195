@@ -27,7 +27,7 @@
   $username = " ";
   $sql_username = "SELECT username FROM nofear195_certificates WHERE permit = '$permit'";
   $result_username = $conn->query($sql_username);
-  if ($result_username) {
+  if ($result_username->num_rows > 0) {
       $row_username = $result_username->fetch_assoc();
       $username = $row_username['username'];
   }
@@ -36,7 +36,7 @@
   $nickname = " ";
   $sql_nickname = "SELECT nickname FROM nofear195_users WHERE username = '$username'";
   $result_nickname = $conn->query($sql_nickname);
-  if ($result_nickname) {
+  if ($result_nickname->num_rows > 0) {
       $row_nickname = $result_nickname->fetch_assoc();
       $nickname = $row_nickname['nickname'];
   }
@@ -69,7 +69,6 @@
         <form method="post" action="./handle_comment_add.php">
             <div class="nickname">暱稱︰<?php  echo $nickname; ?></div>
             <div><textarea name="comment" placeholder="歡迎留言"></textarea></div>
-            <input type="hidden" name="username" value="<?php echo $username; ?>">
             <?php
               if ($result_username->num_rows > 0) {
                  echo "<input class='submit' type='submit' value='送出'>";
@@ -91,7 +90,7 @@
                     echo       "<p class='comments__link'>";
                                if ($row['username'] === $username) {
                                    echo "<a href='./comment_update.php?id=" . $row['id'] . "'>編輯</a>";
-                                   echo "<a href='./handle_comment_delete.php?username=" . $row['username'] . "&id=" . $row['id'] . "'>刪除</a>";
+                                   echo "<a href='./handle_comment_delete.php?id=" . $row['id'] . "'>刪除</a>";
                                }
                     echo       "</p>";
                     echo   "</div>";

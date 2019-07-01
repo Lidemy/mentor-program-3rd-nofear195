@@ -1,24 +1,26 @@
 <?php
   require_once("./conn.php");
+
   
-  $sql_username = "SELECT username FROM nofear195_certificates WHERE permit = " . $_COOKIE["permit"];
+  $id = $_POST['id'];
+  $comment = $_POST['comment'];
+
+  $permit = isset($_COOKIE["permit"]) ? $_COOKIE["permit"] : "";
+  $sql_username = "SELECT username FROM nofear195_certificates WHERE permit =  '$permit' ";
   $result_username = $conn->query($sql_username);
-  $row_username = $result_username->fetch_assoc();
-  if ($_POST['username'] === $row_username['username']) {
-      $comment = $_POST['comment'];
-      $id = $_POST['id'];
+  if ($result_username->num_rows > 0) {
+      $row_username = $result_username->fetch_assoc();
+      $username = $row_username['username'];
   } else {
-      echo "<script type='text/javascript'>alert('使用者錯誤');</script>";
+      echo "<script type='text/javascript'>alert('請先登入喔');</script>";
       header("Refresh:0.1; url=./index.php");
       die();
   }
 
-  if (empty($comment) || empty($id)) {
-      die('empty data');
-  }
-  $sql = "UPDATE nofear195_comments SET comment = '$comment' WHERE id = '$id'";
+  $sql = "UPDATE nofear195_comments SET comment = '$comment' WHERE id = '$id' and username = '$username' ";
   if ($conn->query($sql)) {
-      header("Location: ./index.php");
+      echo "<script type='text/javascript'>alert('編輯成功');</script>";
+      header("Refresh:0.1; url=./index.php");
   } else {
       echo "failed," . $conn->error;
   }

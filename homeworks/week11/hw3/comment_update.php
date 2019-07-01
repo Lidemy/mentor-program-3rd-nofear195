@@ -26,7 +26,6 @@
         <form method="post" action="./handle_comment_update.php">
             <div>編輯內容︰</div>
             <div><textarea name="comment"><?php echo $row['comment']?></textarea></div>
-            <input type="hidden" name="username" value="<?php echo $row['username']?>">
             <input type="hidden" name="id" value="<?php echo $id?>">
             <input class="submit" type="submit" value="送出">
         </form>

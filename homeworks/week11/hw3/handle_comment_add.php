@@ -1,28 +1,28 @@
 <?php
   require_once('./conn.php');
+
+  $comment = $_POST['comment'];   
   
-  $sql_username = "SELECT username FROM nofear195_certificates WHERE permit = " . $_COOKIE["permit"];
+  $permit = isset($_COOKIE["permit"]) ? $_COOKIE["permit"] : "";
+  $sql_username = "SELECT username FROM nofear195_certificates WHERE permit =  '$permit' ";
   $result_username = $conn->query($sql_username);
-  $row_username = $result_username->fetch_assoc();
-  if ($_POST['username'] === $row_username['username']) {
-      $username = $_POST['username'];
+  if ($result_username->num_rows > 0) {
+      $row_username = $result_username->fetch_assoc();
+      $username = $row_username['username'];
   } else {
-      echo "<script type='text/javascript'>alert('使用者錯誤');</script>";
+      echo "<script type='text/javascript'>alert('請先登入喔');</script>";
       header("Refresh:0.1; url=./index.php");
       die();
   }
-
-  $comment = $_POST['comment'];   
+  
   if (empty($comment)) {
-      echo "<script type='text/javascript'>alert('請檢查資料');</script>";
+      echo "<script type='text/javascript'>alert('請輸入留言');</script>";
       header("Refresh:0.1; url=./index.php");
       die();
   }
       
-  $sql = "INSERT INTO nofear195_comments(username, comment) 
-          VALUES( '$username' ,'$comment')";
-  $result = $conn->query($sql);
-  if ($result) {
+  $sql = "INSERT INTO nofear195_comments(username, comment) VALUES( '$username' ,'$comment')";
+  if ($conn->query($sql)) {
       echo "<script type='text/javascript'>alert('成功新增留言');</script>";
       header("Refresh:0.1; url=./index.php");
   } else {
